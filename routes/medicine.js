@@ -4,7 +4,7 @@ const Medicine = require("../models/medicine");
 router.get("/medicine", async (req, res) => {
   try {
     const page = parseInt(req.query.page);
-    const pageSize = 34;
+    const pageSize = 36;
     const startIndex = (page - 1) * pageSize;
     const medicineData = await Medicine.find()
       .sort({ generic_id: 1 })
