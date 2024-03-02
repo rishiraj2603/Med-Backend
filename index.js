@@ -11,7 +11,7 @@ mongoose.connect(MONGO_DB_URL).then(() => {
   console.log("mongoDB running");
 });
 app.use(express.json());
-app.use(cors({ origin: "http://localhost:5173" }));
+app.use(cors());
 app.use(medicineRoutes);
 app.use(userRoutes);
 
