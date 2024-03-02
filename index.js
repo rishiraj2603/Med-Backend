@@ -12,6 +12,10 @@ mongoose.connect(MONGO_DB_URL).then(() => {
 });
 app.use(express.json());
 app.use(cors());
+app.get("/", (req, res) => {
+  res.setHeader("Access-Control-Allow-Credential", "true");
+  res.send("Backend APIs Running");
+});
 app.use(medicineRoutes);
 app.use(userRoutes);
 
