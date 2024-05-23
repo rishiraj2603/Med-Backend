@@ -9,9 +9,9 @@ const MONGO_DB_URL = process.env.MONGO_DB_URL || process.env.DB_URL;
 const userRoutes = require("./routes/user");
 const LocalStrategy = require("passport-local");
 const passport = require("passport");
+const User = require("./models/user");
 const session = require("express-session");
 const cors = require("cors");
-
 mongoose.connect(MONGO_DB_URL).then(() => {
   console.log("mongoDB running");
 });
