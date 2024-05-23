@@ -19,7 +19,7 @@ const CLOUD_NAME = process.env.CLOUD_NAME;
 
 // const upload = multer({ storage: storage }).single("avatar");
 
-router.get("/upload", (req, res) => {
+router.get("/uploadValue", (req, res) => {
   // upload(req, res, (err) => {
   //   fs.readFile(`./uploads/${req.file.originalname}`, (err, data) => {
   //     if (err) return console.log("This is your Error", err);
@@ -37,7 +37,7 @@ router.get("/upload", (req, res) => {
   res.status(200).json({ PRESET_NAME, CLOUD_API_KEY, CLOUD_NAME });
 });
 
-router.post("/upload", async (req, res) => {
+router.post("/uploadText", async (req, res) => {
   const { image } = req.body;
   console.log("🚀 ~ router.post ~ image:", image);
 
