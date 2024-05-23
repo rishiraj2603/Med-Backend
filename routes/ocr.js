@@ -19,7 +19,7 @@ const CLOUD_NAME = process.env.CLOUD_NAME;
 
 // const upload = multer({ storage: storage }).single("avatar");
 
-router.post("/upload", (req, res) => {
+router.get("/upload", (req, res) => {
   // upload(req, res, (err) => {
   //   fs.readFile(`./uploads/${req.file.originalname}`, (err, data) => {
   //     if (err) return console.log("This is your Error", err);
@@ -35,6 +35,21 @@ router.post("/upload", (req, res) => {
   //   });
   // });
   res.status(200).json({ PRESET_NAME, CLOUD_API_KEY, CLOUD_NAME });
+});
+
+router.post("/upload", async (req, res) => {
+  const { image } = req.body;
+  console.log("🚀 ~ router.post ~ image:", image);
+
+  (async () => {
+    const worker = await createWorker("eng");
+    const ret = await worker.recognize(image);
+    console.log("🚀 ~ ret:", ret);
+    const textData = ret.image.text;
+    console.log("🚀 ~ textData:", textData);
+    await worker.terminate();
+    res.status(200).json(textData);
+  })();
 });
 
 module.exports = router;
