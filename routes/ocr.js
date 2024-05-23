@@ -1,8 +1,12 @@
 //dependencies
+require("dotenv").config();
 const router = require("express").Router();
 const fs = require("fs");
 const multer = require("multer");
 const { createWorker } = require("tesseract.js");
+const PRESET_NAME=process.env.PRESET_NAME;
+const  CLOUD_API_KEY=process.env.CLOUD_API_KEY;
+const CLOUD_NAME=process.env.CLOUD_NAME;
 
 //storage
 // const storage = multer.diskStorage({
@@ -26,7 +30,7 @@ router.post("/upload", (req, res) => {
         const ret = await worker.recognize(data);
         const textData = ret.data.text;
         //console.log(ret.data.text);
-        res.status(200).json(textData);
+        res.status(200).json({PRESET_NAME, CLOUD_API_KEY, CLOUD_NAME, textData});
         await worker.terminate();
       })();
     });
