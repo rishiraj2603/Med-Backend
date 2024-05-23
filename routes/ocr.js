@@ -34,7 +34,7 @@ router.post("/upload", (req, res) => {
   //     })();
   //   });
   // });
-  res.status(200).json({ PRESET_NAME, CLOUD_API_KEY, CLOUD_NAME, textData });
+  res.status(200).json({ PRESET_NAME, CLOUD_API_KEY, CLOUD_NAME });
 });
 
 module.exports = router;
