@@ -40,16 +40,18 @@ router.get("/uploadValue", (req, res) => {
 router.post("/uploadText", async (req, res) => {
   const { image } = req.body;
   console.log("🚀 ~ router.post ~ image:", image);
+  fs.readFile(image, (err, data) => {
+    if (err) return console.log("This is your Error", err);
 
-  (async () => {
-    const worker = await createWorker("eng");
-    const ret = await worker.recognize(image);
-    console.log("🚀 ~ ret:", ret);
-    const textData = ret.image.text;
-    console.log("🚀 ~ textData:", textData);
-    await worker.terminate();
-    res.status(200).json(textData);
-  })();
+    (async () => {
+      const worker = await createWorker("eng");
+      const ret = await worker.recognize(data);
+      const textData = ret.data.text;
+      //console.log(ret.data.text);
+      res.status(200).json({ message: "hello" });
+      await worker.terminate();
+    })();
+  });
 });
 
 module.exports = router;
